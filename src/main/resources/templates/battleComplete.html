@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://thymeleaf.org">
+<title>Crypto Crashout</title>
+<body>
+<header>
+    <h1>Crypto Crashouts</h1>
+</header>
+
+<main>
+    <p>Your battle has been computed</p>
+    <p>Player 1</p>
+    <p th:text="${completedBattle.getPlayer1Id()}"></p>
+
+    <p>Player 2</p>
+    <p th:text="${completedBattle.getPlayer2Id()}"></p>
+
+    <p>Winner</p>
+    <p th:text="${completedBattle.getWinner()}"></p>
+</main>
+</body>
+</html>
