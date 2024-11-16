@@ -9,4 +9,9 @@ public class PageController {
     public String home() {
         return "index";  // This refers to a view named 'index.html' or similar
     }
+
+    @GetMapping("/card")
+    public String viewCard() {
+        return "viewCards";
+    }
 }
