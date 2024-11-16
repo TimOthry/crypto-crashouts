@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crypto Data</title>
+</head>
+<body>
+
+<h1>Crypto Data</h1>
+
+<div th:if="${crypto}">
+    <p><strong>Symbol:</strong> <span th:text="${crypto.data.item.fromAssetSymbol}"></span></p>
+    <p><strong>Price:</strong> <span th:text="${crypto.data.item.rate}"></span></p>
+</div>
+
+<div th:if="${error}">
+    <p th:text="${error}"></p>
+</div>
+
+</body>

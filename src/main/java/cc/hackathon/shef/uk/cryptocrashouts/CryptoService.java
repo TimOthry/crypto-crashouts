@@ -20,8 +20,20 @@ public class CryptoService {
         this.restTemplate = restTemplate;
     }
 
-    public CryptoData getCryptoData(String symbol) {
-        String url = "https://cryptoapis.io/api/v1/cryptocurrency/" + symbol + "/data?apikey=" + apiKey;
-        return restTemplate.getForObject(url, CryptoData.class);
+    public CryptoResponse getCryptoData(String symbol) {
+        // Construct the URL with the correct parameters
+        String url = "https://rest.cryptoapis.io/market-data/exchange-rates/by-symbols/" + symbol + "/usd?calculationTimestamp=" + (System.currentTimeMillis() / 1000);
+
+        // Set the authorization header
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-API-Key", apiKey);
+
+        // Create an HttpEntity with the headers
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        // Send GET request and deserialize the response to CryptoResponse
+        ResponseEntity<CryptoResponse> response = restTemplate.exchange(url, HttpMethod.GET, entity, CryptoResponse.class);
+
+        return response.getBody();
     }
 }
