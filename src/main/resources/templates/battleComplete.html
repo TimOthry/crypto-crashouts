@@ -14,8 +14,12 @@
     <p>Player 2</p>
     <p th:text="${completedBattle.getPlayer2Id()}"></p>
 
-    <p>Winner</p>
-    <p th:text="${completedBattle.getWinner()}"></p>
+    <p th:if="${completedBattle.getWinner()} == ${battleQueNum}">You won!!</p>
+    <p th:unless="${completedBattle.getWinner()} == ${battleQueNum}">You lost!</p>
+
+    <p>A very cool battle animation or screen will now appear and you will be very impressed</p>
+
+    <a th:href="@{/home}">Home</a>
 </main>
 </body>
 </html>

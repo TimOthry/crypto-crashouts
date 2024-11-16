@@ -29,6 +29,11 @@ public class mainController {
         return "landing";
     }
 
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
+
     @PostMapping("/battle")
     public String battle(String coinAmount, String coinName, Model model) {
         // add the user to the queue for a battle
@@ -90,6 +95,7 @@ public class mainController {
 
                 // send the user to the after battle page
                 model.addAttribute("completedBattle", completedBattle1);
+                model.addAttribute("battleQueNum", id);
                 return "battleComplete";
             } else {
                 // make the user wait more for enough players
@@ -99,6 +105,7 @@ public class mainController {
         } else {
             // if the user has been in a battle that's been completed
             model.addAttribute("completedBattle", completedBattle);
+            model.addAttribute("battleQueNum", id);
             return "battleComplete";
         }
     }

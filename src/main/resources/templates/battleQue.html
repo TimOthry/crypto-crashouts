@@ -12,6 +12,12 @@
 
     <p>Number in database:</p>
     <p th:text="${battleQueNum}">Queue num</p>
+
+    <!-- This form will be called by javascript and won't appear here -->
+    <p>Manually refresh to see if you've won a battle</p>
+    <form th:action="@{/battlequeue/} + ${battleQueNum}" method="post">
+        <button type="submit">Refresh to battle queue</button>
+    </form>
 </main>
 </body>
 </html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th:="http://thymeleaf.org">
+<title>Crypto Crashout</title>
+<body>
+<header>
+    <h1>Crypto Crashouts</h1>
+</header>
+
+<main>
+    <h1>This is the home page</h1>
+    <p>This page will be made nice with some java script etc.</p>
+
+    <!-- form to start a battle. The player should select a card on screen, rather than enter in values -->
+    <form action="/battle" method="post">
+        <label for="coinAmount">Coin amount:</label>
+        <input type="text" id="coinAmount" name="coinAmount">
+
+        <label for="coinName">Coin name</label>
+        <input type="text" id="coinName" name="coinName">
+
+        <button type="submit">Battle!</button>
+    </form>
+
+    <p>Here the user should have a list of their cards</p>
+</main>
+</body>
+</html>
