@@ -16,19 +16,19 @@ public class CompletedBattle {
     // Player 1 and their card
     private Long player1Id;
     private String p1CoinName;
-    private String p1CoinAmount;
+    private double p1CoinAmount;
 
     // Player 2 and their card
     private Long player2Id;
     private String p2CoinName;
-    private String p2CoinAmount;
+    private double p2CoinAmount;
 
     // the winner
-    private int winner;
+    private Long winner;
 
     public CompletedBattle() {}
 
-    public CompletedBattle(Long player1Id, String p1CoinName, String p1CoinAmount, Long player2Id, String p2CoinName, String p2coinAmount) {
+    public CompletedBattle(Long player1Id, String p1CoinName, double p1CoinAmount, Long player2Id, String p2CoinName, double p2coinAmount, Long winner) {
         this.player1Id = player1Id;
         this.p1CoinName = p1CoinName;
         this.p1CoinAmount = p1CoinAmount;
@@ -36,6 +36,8 @@ public class CompletedBattle {
         this.player2Id = player2Id;
         this.p2CoinName = p2CoinName;
         this.p2CoinAmount = p2coinAmount;
+
+        this.winner = winner;
     }
 
     public Long getId() {
@@ -50,7 +52,7 @@ public class CompletedBattle {
         return p1CoinName;
     }
 
-    public String getP1CoinAmount() {
+    public double getP1CoinAmount() {
         return p1CoinAmount;
     }
 
@@ -62,11 +64,11 @@ public class CompletedBattle {
         return p2CoinName;
     }
 
-    public String getP2CoinAmount() {
+    public double getP2CoinAmount() {
         return p2CoinAmount;
     }
 
-    public int getWinner() {
+    public Long getWinner() {
         return winner;
     }
 }

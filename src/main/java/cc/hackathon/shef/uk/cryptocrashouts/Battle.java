@@ -50,6 +50,17 @@ public class Battle {
         }
     }
 
+    public static int battleJustTwoCards(Card p1Card, Card p2Card) {
+        // main battle logic
+        if (p1Card.getPower() > p2Card.getPower()) {
+            return 1;
+        } else if (p1Card.getPower() < p2Card.getPower()) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * Gets the winner of the battle
      * @return 1 = player 1, 2 = player 2, 0 = draw
