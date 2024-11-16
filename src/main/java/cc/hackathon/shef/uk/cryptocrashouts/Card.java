@@ -2,6 +2,7 @@ package cc.hackathon.shef.uk.cryptocrashouts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
+import io.github.cdimascio.dotenv.Dotenv;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -34,7 +35,7 @@ public class Card {
                     .url("https://rest.cryptoapis.io/market-data/exchange-rates/by-symbols/" + name + "/usd")
                     .get()
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("x-api-key", "8a7c4da3dee5856d0cf935100e8ef0e31b1abd58")
+                    .addHeader("x-api-key", Dotenv.configure().load().get("API_KEY"))
                     .build();
 
             Response response = client.newCall(request).execute();
