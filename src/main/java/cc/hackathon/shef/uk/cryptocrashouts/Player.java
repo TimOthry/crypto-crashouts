@@ -38,8 +38,7 @@ public class Player {
             String line = sc.nextLine();
             String[] split = line.split(",");
 
-            // TODO make this get the market value of the coin by the name
-            Card newCard = new Card(split[0], Double.parseDouble(split[1]), 2);
+            Card newCard = new Card(split[0], Double.parseDouble(split[1]));
             newCards.add(newCard);
         }
 

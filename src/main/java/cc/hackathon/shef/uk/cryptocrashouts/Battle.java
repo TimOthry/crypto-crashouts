@@ -22,7 +22,7 @@ public class Battle {
      */
     public void battleTwoCards(String crypto1, String crypto2) {
         // find player 1's card in their deck/wallet
-        Card p1Card = new Card("test", 0, 0);
+        Card p1Card = null;
 
         for (Card card : player1.getCards()) {
             if (card.getName().equals(crypto1)) {
@@ -32,7 +32,7 @@ public class Battle {
         }
 
         // find player 2's card in their deck
-        Card p2Card = new Card("test", 0, 0);
+        Card p2Card = null;
 
         for (Card card : player2.getCards()) {
             if (card.getName().equals(crypto2)) {
