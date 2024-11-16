@@ -7,6 +7,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Provides static methods to get the current balance of a given crypto wallet
@@ -43,7 +44,6 @@ public class Wallet {
             String balance = (String) confirmedBalance.get("amount");
             return Double.parseDouble(balance);
         } catch (Exception e) {
-            e.printStackTrace();
             return -1;
         }
     }
@@ -83,12 +83,15 @@ public class Wallet {
         }
     }
 
-    public static double bogeWalletValue(String walletId) {
+    public static double dogeWalletValue(String walletId) {
         try {
+            // add timeout to avoid throughput limit
+            TimeUnit.SECONDS.sleep(1);
+
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url("https://rest.cryptoapis.io/blockchain-data/dogecoin/mainnet/addresses/DEgDVFa2DoW1533dxeDVdTxQFhMzs1pMke/balance?context=yourExampleString")
+                    .url("https://rest.cryptoapis.io/blockchain-data/dogecoin/mainnet/addresses/" + walletId + "/balance")
                     .get()
                     .addHeader("Content-Type", "application/json")
                     .addHeader("x-api-key", Dotenv.configure().load().get("API_KEY"))
@@ -96,6 +99,8 @@ public class Wallet {
 
             Response response = client.newCall(request).execute();
             String json = response.body().string();
+
+            System.out.println(json);
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> map = mapper.readValue(json, Map.class);

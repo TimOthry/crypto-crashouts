@@ -14,7 +14,7 @@ public class TestBattling {
         System.out.println(Dotenv.configure().load().get("API_KEY"));
         System.out.println(Wallet.btcWalletValue("34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo"));
         System.out.println(Wallet.ethWalletValue("0x00000000219ab540356cBB839Cbe05303d7705Fa"));
-        System.out.println(Wallet.bogeWalletValue("DEgDVFa2DoW1533dxeDVdTxQFhMzs1pMke"));
+        System.out.println(Wallet.dogeWalletValue("DEgDVFa2DoW1533dxeDVdTxQFhMzs1pMke"));
 
         // test reading a wallet csv and then print it out
         Player player1 = new Player("src/main/resources/testWallet.csv");

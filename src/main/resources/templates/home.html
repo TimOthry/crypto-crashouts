@@ -10,8 +10,28 @@
     <h1>This is the home page</h1>
     <p>This page will be made nice with some java script etc.</p>
 
+    <!-- Show the user's cards. This is more of an example to make adding the animated card stats more straight forward -->
+    <p>Your cards:</p>
+    <p>
+        BTC: Wallet:
+        <span th:text="${btcWallet}"></span>
+        Power: <span th:text="${btcPower}"></span>
+    </p>
+
+    <p>
+        ETH:
+        Wallet: <span th:text="${ethWallet}"></span>
+        Power: <span th:text="${ethPower}"></span>
+    </p>
+
+    <p>
+        Doge:
+        Wallet: <span th:text="${dogeWallet}"></span>
+        Power: <span th:text="${dogePower}"></span>
+    </p>
+
     <!-- form to start a battle. The player should select a card on screen, rather than enter in values -->
-    <form action="/battle" method="post">
+    <form th:action="@{/battle/} + ${userId}" method="post">
         <label for="coinAmount">Coin amount:</label>
         <input type="text" id="coinAmount" name="coinAmount">
 

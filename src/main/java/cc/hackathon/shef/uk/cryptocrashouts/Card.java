@@ -9,6 +9,7 @@ import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a card for a crypto currency
@@ -29,6 +30,10 @@ public class Card {
 
     private static double getMarketValue(String name) {
         try {
+            // add 1 second delay to be below api throughput limit
+            TimeUnit.SECONDS.sleep(1);
+
+            System.out.println("name: " + name);
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -40,6 +45,8 @@ public class Card {
 
             Response response = client.newCall(request).execute();
             String json = response.body().string();
+
+            System.out.println(json);
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String, Object> map = mapper.readValue(json, Map.class);
@@ -53,6 +60,8 @@ public class Card {
         } catch (IOException e) {
             e.printStackTrace();
             return 0.0;
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

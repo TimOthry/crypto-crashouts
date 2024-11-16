@@ -9,8 +9,21 @@
 <main>
     <h1>Welcome to Crypto Crashouts!</h1>
 
-    <!-- Option to upload a csv wallet file -->
-    <p>Please upload your wallet as a csv file</p>
+    <!-- Enter wallet addresses -->
+    <p>Please enter your wallet address for each crypto type</p>
+
+    <form th:action="@{/addwallets}" method="post">
+        <label for="btc">Bitcoin</label>
+        <input type="text" id="btc" name="btc"><br>
+
+        <label for="eth">Ethereum</label>
+        <input type="text" id="eth" name="eth"><br>
+
+        <label for="doge">Doge coin</label>
+        <input type="text" id="doge" name="doge"><br>
+
+        <button type="submit">Add wallets</button>
+    </form>
 </main>
 </body>
 </html>
