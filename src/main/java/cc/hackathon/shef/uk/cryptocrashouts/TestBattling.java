@@ -14,7 +14,6 @@ public class TestBattling {
 
         Player player2 = new Player("src/main/resources/testWallet2.csv");
         System.out.println(player2.toString());
-
         String again = "y";
 
         while (again.equals("y")) {
