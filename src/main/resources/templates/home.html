@@ -71,9 +71,9 @@
         const submitButton = document.getElementById("submit-button");
 
         const cardModels = [
-            { name: "eth", file: "/assets/solana.glb" },
-            { name: "btc", file: "/assets/solana.glb" },
-            { name: "doge", file: "/assets/solana.glb" },
+            { name: "eth", file: "/assets/eth.glb" },
+            { name: "btc", file: "/assets/bitcoin.glb" },
+            { name: "doge", file: "/assets/doge.glb" },
         ];
 
         // Get the page background color
@@ -147,8 +147,19 @@
                 (error) => console.error(`Error loading ${name}:`, error)
             );
 
+            const fullCard = document.createElement("div")
+            fullCard.style = '' +
+                'display:flex;' +
+                'flex-direction : column';
+
             cardDiv.appendChild(renderer.domElement);
-            container.appendChild(cardDiv);
+            fullCard.appendChild(cardDiv);
+
+            const infoDiv = document.createElement("div");
+            infoDiv.innerText = "Wallet: 2 \n Power : 100"
+            fullCard.appendChild(infoDiv);
+
+            container.appendChild(fullCard)
 
             const animate = () => {
                 requestAnimationFrame(animate);
