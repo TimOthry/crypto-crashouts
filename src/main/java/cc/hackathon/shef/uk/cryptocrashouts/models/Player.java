@@ -15,13 +15,23 @@ public class Player {
     private String btcWallet;
     private String ethWallet;
     private String dogeWallet;
+    private String maticWallet;
 
     public Player() {}
 
-    public Player(String btcWallet, String ethWallet, String dogeWallet) {
-        this.btcWallet = btcWallet;
-        this.ethWallet = ethWallet;
-        this.dogeWallet = dogeWallet;
+    public Player(String btcWallet, String ethWallet, String dogeWallet, String maticWallet) {
+        if (btcWallet != null) {
+            this.btcWallet = btcWallet;
+        }
+        if (ethWallet != null) {
+            this.ethWallet = ethWallet;
+        }
+        if (dogeWallet != null) {
+            this.dogeWallet = dogeWallet;
+        }
+        if (maticWallet != null) {
+            this.maticWallet = maticWallet;
+        }
     }
 
     public Long getId() {
@@ -38,5 +48,9 @@ public class Player {
 
     public String getDogeWallet() {
         return dogeWallet;
+    }
+
+    public String getMaticWallet() {
+        return maticWallet;
     }
 }

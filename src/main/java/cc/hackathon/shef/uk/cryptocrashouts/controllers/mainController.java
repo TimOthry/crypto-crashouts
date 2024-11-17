@@ -36,13 +36,13 @@ public class mainController {
     }
 
     @PostMapping("/addwallets")
-    public String addWallets(String btc, String eth, String doge, RedirectAttributes redirectAttributes) {
+    public String addWallets(String btc, String eth, String doge, String matic, RedirectAttributes redirectAttributes) {
         // add a player record to the database to store the wallets. I couldn't think of a better way to do this
         // as you can't pass an object from page to page every time as that's tedious, so just put player's id in
         // the url. They can't login or anything, so they'll have to reenter their information every time
 
         // create a player
-        Player player = new Player(btc, eth, doge);
+        Player player = new Player(btc, eth, doge, matic);
         Player savedPlayer = playerService.save(player);
 
         // redirect to home page
