@@ -40,18 +40,24 @@
         BTC: Wallet:
         <span th:text="${btcWallet}"></span>
         Power: <span th:text="${btcPower}"></span>
+        <div id="btcWalletContainer" th:attr="btcWallet=${btcWallet}"></div>
+        <div id="btcPowerContainer" th:attr="btcPower=${btcPower}"></div>
     </p>
 
     <p>
         ETH:
         Wallet: <span th:text="${ethWallet}"></span>
         Power: <span th:text="${ethPower}"></span>
+        <div id="ethWalletContainer" th:attr="ethWallet=${ethWallet}"></div>
+        <div id="ethPowerContainer" th:attr="ethPower=${ethPower}"></div>
     </p>
 
     <p>
         Doge:
         Wallet: <span th:text="${dogeWallet}"></span>
         Power: <span th:text="${dogePower}"></span>
+        <div id="dogeWalletContainer" th:attr="dogeWallet=${dogeWallet}"></div>
+        <div id="dogePowerContainer" th:attr="dogePower=${dogePower}"></div>
     </p>
 
     <!-- form to start a battle. The player should select a card on screen, rather than enter in values -->
@@ -155,8 +161,16 @@
             cardDiv.appendChild(renderer.domElement);
             fullCard.appendChild(cardDiv);
 
+            let wallet = 0;
+            let power = 0;
+            let walletContainer = document.getElementById(name + "WalletContainer")
+            wallet = walletContainer.getAttribute(name+ "Wallet")
+
+            let powerContainer = document.getElementById(name +"PowerContainer")
+            power = powerContainer.getAttribute(name + "Power")
+
             const infoDiv = document.createElement("div");
-            infoDiv.innerText = "Wallet: 2 \n Power : 100"
+            infoDiv.innerText = "Wallet: " + wallet +  " \n Power: " + power
             fullCard.appendChild(infoDiv);
 
             container.appendChild(fullCard)
