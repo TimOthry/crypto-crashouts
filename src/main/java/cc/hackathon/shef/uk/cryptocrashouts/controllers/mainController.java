@@ -85,6 +85,9 @@ public class mainController {
 
         // send the user to the waiting for battle page
         model.addAttribute("userId", userId);
+
+        // Need a way to get the Players Chosen Card to then display that card in the Waiting room page
+        // Then need to edit the js in the battleQue.html to get the correct object
         return "battleQue";
     }
 
