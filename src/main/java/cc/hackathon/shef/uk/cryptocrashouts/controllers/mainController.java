@@ -80,6 +80,8 @@ public class mainController {
         BattleQue battleQue = new BattleQue(coinName, Double.parseDouble(coinAmount));
         battleQueService.addToQueue(battleQue);
 
+        System.out.println(coinAmount + coinName);
+
         // the reference for the user in the database
         model.addAttribute("battleQueNum", battleQue.getId());
 

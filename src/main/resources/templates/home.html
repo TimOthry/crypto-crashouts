@@ -22,10 +22,13 @@
     <section id="battle-form">
         <form id="crypto-form" th:action="@{/battle/{userId}(userId=${userId})}" method="post">
             <h2>Enter Battle</h2>
-            <p>Selected Card: <span id="coinName">None</span></p>
+            <p>Selected Card: <span id="coinNameDisplay">None</span></p>
 
             <label for="coinAmount">Enter Amount:</label>
             <input type="number" id="coinAmount" name="coinAmount" min="0" step="any" placeholder="Enter amount" required>
+
+            <!-- The name of the card used. To be edited by JavaScript -->
+            <input type="hidden" id="coinName" name="coinName" value="btc">
 
             <button type="submit" id="submit-button" disabled>Enter Battle</button>
         </form>
@@ -63,7 +66,8 @@
 
     document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("cards-container");
-        const selectedCardElement = document.getElementById("coinName");
+        const selectedCardElement = document.getElementById("coinNameDisplay");
+        const formCoinName = document.getElementById("coinName");
         const submitButton = document.getElementById("submit-button");
 
         const cardModels = [
@@ -155,6 +159,7 @@
             // Add click event
             cardDiv.addEventListener("click", () => {
                 selectedCardElement.textContent = name;
+                formCoinName.value = name;
                 submitButton.disabled = false;
 
                 document.querySelectorAll(".card-container").forEach((card) => {
