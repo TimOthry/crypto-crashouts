@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th:="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Crypto Crashout</title>
     <link th:href="@{/styles/home_style.css}" rel="stylesheet" >
@@ -72,6 +72,9 @@
             { name: "doge", file: "/assets/solana.glb" },
         ];
 
+        // Get the page background color
+        const pageBackgroundColor = window.getComputedStyle(document.body).backgroundColor;
+
         // Set up the renderer
         const createRenderer = () => {
             const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -96,7 +99,8 @@
 
             const renderer = createRenderer();
             const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0xf4f4f9);
+
+            scene.background = new THREE.Color(pageBackgroundColor);
             scene.add(light.clone(), directionalLight.clone());
 
             const loader = new GLTFLoader();
@@ -104,9 +108,36 @@
                 file,
                 (gltf) => {
                     const model = gltf.scene;
-                    model.scale.set(1, 1, 1);
+                    model.scale.set(0.7, 0.7, 0.7);
                     model.position.set(0, 0, 0);
                     scene.add(model);
+                    model.rotation.x = - Math.PI / 4
+
+                    // Store original rotation
+                    const originalRotation = { x: model.rotation.x, y: model.rotation.y, z: model.rotation.z };
+
+                    // Mouse move event to rotate the object based on mouse position
+                    const onMouseMove = (event) => {
+                        // Get mouse position relative to the canvas
+                        const mouseX = (event.clientX / window.innerWidth) * 2 - 1; // Normalize to -1 to 1
+                        const mouseY = -(event.clientY / window.innerHeight) * 2 + 1; // Normalize to -1 to 1
+
+                        // Apply mouse position to the rotation (adjust scale as needed)
+                        model.rotation.x = mouseY * Math.PI * 0.2; // Scale the effect for Y axis
+                        model.rotation.y = mouseX * Math.PI * 0.2; // Scale the effect for X axis
+                    };
+
+                    // Add event listeners to track mouse movement
+                    cardDiv.addEventListener("mouseenter", () => {
+                        window.addEventListener("mousemove", onMouseMove); // Start tracking mouse when hover begins
+                    });
+
+                    // Remove mousemove event when the mouse leaves the card
+                    cardDiv.addEventListener("mouseleave", () => {
+                        window.removeEventListener("mousemove", onMouseMove); // Stop tracking mouse when hover ends
+                        // Reset to original rotation
+                        model.rotation.set(originalRotation.x, originalRotation.y, originalRotation.z);
+                    });
                 },
                 undefined,
                 (error) => console.error(`Error loading ${name}:`, error)
