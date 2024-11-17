@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th:="http://thymeleaf.org">
-<title>Crypto Crashout</title>
+
+<head>
+    <link th:href="@{/styles/landing_style.css}" rel="stylesheet" >
+    <title>Crypto Crashout</title>
+</head>
+
 <body>
-<header>
-    <h1>Crypto Crashouts</h1>
+<header id="main-header">
+    <h1 class="header-title">Crypto Crashouts</h1>
 </header>
 
-<main>
-    <h1>Welcome to Crypto Crashouts!</h1>
+<main id="main-content">
+    <h1 class="welcome-message">Welcome to Crypto Crashouts!</h1>
 
     <!-- Enter wallet addresses -->
-    <p>Please enter your wallet address for each crypto type</p>
+    <p class="intro-text">Please enter your wallet address for each crypto type</p>
 
-    <form th:action="@{/addwallets}" method="post">
-        <label for="btc">Bitcoin</label>
-        <input type="text" id="btc" name="btc"><br>
+    <form th:action="@{/addwallets}" method="post" class="wallet-form">
+        <label for="btc" class="form-label">Bitcoin</label>
+        <input type="text" id="btc" name="btc" class="form-input"><br>
 
-        <label for="eth">Ethereum</label>
-        <input type="text" id="eth" name="eth"><br>
+        <label for="eth" class="form-label">Ethereum</label>
+        <input type="text" id="eth" name="eth" class="form-input"><br>
 
-        <label for="doge">Doge coin</label>
-        <input type="text" id="doge" name="doge"><br>
+        <label for="doge" class="form-label">Doge coin</label>
+        <input type="text" id="doge" name="doge" class="form-input"><br>
 
-        <button type="submit">Add wallets</button>
+        <button type="submit" class="form-button">Add wallets</button>
     </form>
 </main>
 </body>

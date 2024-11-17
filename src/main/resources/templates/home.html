@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th:="http://thymeleaf.org">
-<title>Crypto Crashout</title>
+<head>
+    <title>Crypto Crashout</title>
+    <link th:href="@{/styles/home_style.css}" rel="stylesheet" >
+</head>
+</head>
+
 <body>
 <header>
     <h1>Crypto Crashouts</h1>
@@ -9,6 +14,22 @@
 <main>
     <h1>This is the home page</h1>
     <p>This page will be made nice with some java script etc.</p>
+
+    <div id="cards-container">
+        <!-- Placeholder for 3D rendering -->
+    </div>
+
+    <section id="battle-form">
+        <form id="crypto-form" th:action="@{/battle/{userId}(userId=${userId})}" method="post">
+            <h2>Enter Battle</h2>
+            <p>Selected Card: <span id="coinName">None</span></p>
+
+            <label for="coinAmount">Enter Amount:</label>
+            <input type="number" id="coinAmount" name="coinAmount" min="0" step="any" placeholder="Enter amount" required>
+
+            <button type="submit" id="submit-button" disabled>Enter Battle</button>
+        </form>
+    </section>
 
     <!-- Show the user's cards. This is more of an example to make adding the animated card stats more straight forward -->
     <p>Your cards:</p>
@@ -31,17 +52,90 @@
     </p>
 
     <!-- form to start a battle. The player should select a card on screen, rather than enter in values -->
-    <form th:action="@{/battle/} + ${userId}" method="post">
-        <label for="coinAmount">Coin amount:</label>
-        <input type="text" id="coinAmount" name="coinAmount">
 
-        <label for="coinName">Coin name</label>
-        <input type="text" id="coinName" name="coinName">
-
-        <button type="submit">Battle!</button>
-    </form>
 
     <p>Here the user should have a list of their cards</p>
 </main>
+
+<script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+    import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("cards-container");
+        const selectedCardElement = document.getElementById("coinName");
+        const submitButton = document.getElementById("submit-button");
+
+        const cardModels = [
+            { name: "Solana", file: "/assets/solana.glb" },
+            { name: "Bitcoin", file: "/assets/solana.glb" },
+            { name: "Doge", file: "/assets/solana.glb" },
+        ];
+
+        // Set up the renderer
+        const createRenderer = () => {
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(250, 350);
+            return renderer;
+        };
+
+        // Set up the camera
+        const camera = new THREE.PerspectiveCamera(60, 250/350, 1, 1000);
+        camera.position.set(0, 0, 3);
+
+        // Add lighting
+        const light = new THREE.AmbientLight(0x333333, 5);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(0, 2, 5);
+
+        // Function to create and render a card
+        const createCard = ({ name, file }) => {
+            const cardDiv = document.createElement("div");
+            cardDiv.classList.add("card-container");
+            cardDiv.setAttribute("data-name", name);
+
+            const renderer = createRenderer();
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf4f4f9);
+            scene.add(light.clone(), directionalLight.clone());
+
+            const loader = new GLTFLoader();
+            loader.load(
+                file,
+                (gltf) => {
+                    const model = gltf.scene;
+                    model.scale.set(1, 1, 1);
+                    model.position.set(0, 0, 0);
+                    scene.add(model);
+                },
+                undefined,
+                (error) => console.error(`Error loading ${name}:`, error)
+            );
+
+            cardDiv.appendChild(renderer.domElement);
+            container.appendChild(cardDiv);
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            };
+            animate();
+
+            // Add click event
+            cardDiv.addEventListener("click", () => {
+                selectedCardElement.textContent = name;
+                submitButton.disabled = false;
+
+                document.querySelectorAll(".card-container").forEach((card) => {
+                    card.classList.remove("highlight");
+                });
+                cardDiv.classList.add("highlight");
+            });
+        };
+
+        // Render all cards
+        cardModels.forEach(createCard);
+    });
+</script>
 </body>
 </html>
