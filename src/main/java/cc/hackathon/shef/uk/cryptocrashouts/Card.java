@@ -29,6 +29,11 @@ public class Card {
     }
 
     private static double getMarketValue(String name) {
+        // no data avaliable for matic, so just insert the value
+        if (name.equals("matic")) {
+            return 0.33;
+        }
+
         try {
             // add timeout to avoid throughput limit
             TimeUnit.MILLISECONDS.sleep(500);

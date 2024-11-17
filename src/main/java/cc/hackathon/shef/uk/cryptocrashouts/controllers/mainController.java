@@ -52,22 +52,29 @@ public class mainController {
     @GetMapping("/home/{id}")
     public String home(@PathVariable Long id, Model model) {
         Player player = playerService.getPlayerById(id);
-        System.out.println(player.getId() + player.getBtcWallet());
 
         // add the wallet values to the page
-        model.addAttribute("btcWallet", Wallet.btcWalletValue(player.getBtcWallet()));
-        model.addAttribute("ethWallet", Wallet.ethWalletValue(player.getEthWallet()));
-        model.addAttribute("dogeWallet", Wallet.dogeWalletValue(player.getDogeWallet()));
+        if (player.getBtcWallet() != null && !player.getBtcWallet().isBlank()) {
+            model.addAttribute("btcWallet", Wallet.btcWalletValue(player.getBtcWallet()));
+            Card btc = new Card("btc", Wallet.btcWalletValue(player.getBtcWallet()));
+            model.addAttribute("btcPower", btc.getPower());
+        }
+        if (player.getEthWallet() != null && !player.getEthWallet().isEmpty()) {
+            model.addAttribute("ethWallet", Wallet.ethWalletValue(player.getEthWallet()));
+            Card eth = new Card("eth", Wallet.ethWalletValue(player.getEthWallet()));
+            model.addAttribute("ethPower", eth.getPower());
+        }
+        if (player.getDogeWallet() != null && !player.getDogeWallet().isEmpty()) {
+            model.addAttribute("dogeWallet", Wallet.dogeWalletValue(player.getDogeWallet()));
+            Card doge = new Card("doge", Wallet.dogeWalletValue(player.getDogeWallet()));
+            model.addAttribute("dogePower", doge.getPower());
+        }
 
-        // make cards of the coins so you can get the power
-        Card btc = new Card("btc", Wallet.btcWalletValue(player.getBtcWallet()));
-        model.addAttribute("btcPower", btc.getPower());
-
-        Card eth = new Card("eth", Wallet.ethWalletValue(player.getEthWallet()));
-        model.addAttribute("ethPower", eth.getPower());
-
-        Card doge = new Card("doge", Wallet.dogeWalletValue(player.getDogeWallet()));
-        model.addAttribute("dogePower", doge.getPower());
+        if (player.getMaticWallet() != null && !player.getMaticWallet().isEmpty()) {
+            model.addAttribute("maticWallet", 892.12);
+            Card matic = new Card("matic", 892.12);
+            model.addAttribute("maticPower", matic.getPower());
+        }
 
         // add the user Id so this can be forwarded around in the urls
         model.addAttribute("userId", id);

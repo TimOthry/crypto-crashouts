@@ -15,7 +15,7 @@ public class TestBattling {
         System.out.println(Wallet.btcWalletValue("34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo"));
         System.out.println(Wallet.ethWalletValue("0x00000000219ab540356cBB839Cbe05303d7705Fa"));
         System.out.println(Wallet.dogeWalletValue("DEgDVFa2DoW1533dxeDVdTxQFhMzs1pMke"));
-
+        System.out.println(Wallet.maticWalletValue("0x0902a667d6a3f287835e0a4593cae4167384abc6"));
         // test reading a wallet csv and then print it out
         Player player1 = new Player("src/main/resources/testWallet.csv");
         System.out.println(player1.toString());

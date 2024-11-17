@@ -123,4 +123,39 @@ public class Wallet {
             return -1;
         }
     }
+
+    public static double maticWalletValue(String walletId) {
+        try {
+            // add timeout to avoid throughput limit
+            TimeUnit.MILLISECONDS.sleep(500);
+
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url("https://rest.cryptoapis.io/blockchain-data/polygon/mainnet/addresses/0x0902a667d6a3f287835e0a4593cae4167384abc6/balance?context=yourExampleString")
+                    .get()
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("x-api-key", Dotenv.configure().load().get("API_KEY"))
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String json = response.body().string();
+
+            System.out.println(json);
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String, Object> map = mapper.readValue(json, Map.class);
+
+            // extract the amount of doge
+            Map<String, Object> data = (Map<String, Object>) map.get("data");
+            Map<String, Object> item = (Map<String, Object>) data.get("item");
+            Map<String, Object> confirmedBalance = (Map<String, Object>) item.get("confirmedBalance");
+
+            String balance = (String) confirmedBalance.get("amount");
+            return Double.parseDouble(balance);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

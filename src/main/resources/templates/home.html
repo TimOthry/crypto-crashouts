@@ -35,8 +35,8 @@
     </section>
 
     <!-- Show the user's cards. This is more of an example to make adding the animated card stats more straight forward -->
-    <p>Your cards:</p>
-    <p>
+    <p>Your wallets:</p>
+    <p th:if="${btcWallet}" id="btc_wallet">
         BTC: Wallet:
         <span th:text="${btcWallet}"></span>
         Power: <span th:text="${btcPower}"></span>
@@ -44,7 +44,7 @@
         <div id="btcPowerContainer" th:attr="btcPower=${btcPower}"></div>
     </p>
 
-    <p>
+    <p th:if="${ethWallet}" id="eth_wallet">
         ETH:
         Wallet: <span th:text="${ethWallet}"></span>
         Power: <span th:text="${ethPower}"></span>
@@ -52,7 +52,7 @@
         <div id="ethPowerContainer" th:attr="ethPower=${ethPower}"></div>
     </p>
 
-    <p>
+    <p th:if="${dogeWallet}" id="doge_wallet">
         Doge:
         Wallet: <span th:text="${dogeWallet}"></span>
         Power: <span th:text="${dogePower}"></span>
@@ -60,10 +60,13 @@
         <div id="dogePowerContainer" th:attr="dogePower=${dogePower}"></div>
     </p>
 
-    <!-- form to start a battle. The player should select a card on screen, rather than enter in values -->
-
-
-    <p>Here the user should have a list of their cards</p>
+    <p th:if="${maticWallet}" id="matic_wallet">
+        Matic:
+        Wallet: <span th:text="${maticWallet}"></span>
+        Power: <span th:text="${maticPower}"></span>
+        <div id="maticWalletContainer" th:attr="maticWallet=${maticWallet}"></div>
+        <div id="maticPowerContainer" th:attr="maticPower=${maticPower}"></div>
+    </p>
 </main>
 
 <script type="module">
@@ -80,6 +83,7 @@
             { name: "eth", file: "/assets/eth.glb" },
             { name: "btc", file: "/assets/bitcoin.glb" },
             { name: "doge", file: "/assets/doge.glb" },
+            { name: "matic", file: "/assets/matic.glb" },
         ];
 
         // Get the page background color
@@ -194,8 +198,19 @@
             });
         };
 
-        // Render all cards
-        cardModels.forEach(createCard);
+        // Render cards
+        if (document.getElementById("btc_wallet") != null) {
+            createCard(cardModels.at(1));
+        }
+        if (document.getElementById("eth_wallet") != null) {
+            createCard(cardModels.at(0));
+        }
+        if (document.getElementById("doge_wallet") != null) {
+            createCard(cardModels.at(2));
+        }
+        if (document.getElementById("matic_wallet") != null) {
+            createCard(cardModels.at(3));
+        }
     });
 </script>
 </body>
