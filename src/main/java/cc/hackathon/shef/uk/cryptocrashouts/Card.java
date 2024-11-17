@@ -30,8 +30,8 @@ public class Card {
 
     private static double getMarketValue(String name) {
         try {
-            // add 1 second delay to be below api throughput limit
-            TimeUnit.SECONDS.sleep(1);
+            // add timeout to avoid throughput limit
+            TimeUnit.MILLISECONDS.sleep(500);
 
             System.out.println("name: " + name);
             OkHttpClient client = new OkHttpClient();

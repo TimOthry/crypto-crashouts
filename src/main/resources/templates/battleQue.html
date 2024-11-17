@@ -15,7 +15,7 @@
 
     <!-- This form will be called by javascript and won't appear here -->
     <p>Manually refresh to see if you've won a battle</p>
-    <form th:action="@{/battlequeue/} + ${battleQueNum}" method="post">
+    <form th:action="@{/battlequeue/__${battleQueNum}__/__${userId}__}" method="post">
         <button type="submit">Refresh to battle queue</button>
     </form>
 </main>

@@ -21,6 +21,9 @@ public class Wallet {
      */
     public static double btcWalletValue(String walletId) {
         try {
+            // add timeout to avoid throughput limit
+            TimeUnit.MILLISECONDS.sleep(500);
+
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -55,6 +58,9 @@ public class Wallet {
      */
     public static double ethWalletValue(String walletId) {
         try {
+            // add timeout to avoid throughput limit
+            TimeUnit.MILLISECONDS.sleep(500);
+
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -86,7 +92,7 @@ public class Wallet {
     public static double dogeWalletValue(String walletId) {
         try {
             // add timeout to avoid throughput limit
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(500);
 
             OkHttpClient client = new OkHttpClient();
 
