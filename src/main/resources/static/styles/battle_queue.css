@@ -63,7 +63,7 @@ main {
 }
 
 /* Form styles */
-form {
+/*form {
     margin-top: 20px;
     padding: 20px;
     background: #f9f9f9;
@@ -94,7 +94,7 @@ form button {
 form button:disabled {
     background: #ccc;
     cursor: not-allowed;
-}
+}*/
 
 /* Battle queue section */
 #battle-queue {
