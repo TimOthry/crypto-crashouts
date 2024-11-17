@@ -16,15 +16,9 @@
         <p>You are currently waiting for a battle. A JavaScript function will submit a form to check if the battle has been completed.</p>
     </div>
 
-    <section id="battle-queue">
-        <p>Number in database:</p>
-        <p th:text="${battleQueNum}">Queue num</p>
-
-        <p>Manually refresh to see if you've won a battle:</p>
-        <form th:action="@{/battlequeue/__${battleQueNum}__/__${userId}__}" method="post">
-            <button type="submit">Refresh to battle queue</button>
-        </form>
-    </section>
+    <!-- Form to check if the battle's been completed -->
+    <form th:action="@{/battlequeue/__${battleQueNum}__/__${userId}__}" method="post" id="refreshForm" hidden>
+    </form>
 
     <!-- 3D Cards container -->
     <div id="cards-container">
@@ -101,6 +95,9 @@
 
         createCard(model);
     });
+
+    // check if the battle has been computed every 1 second
+    setTimeout(function() { document.getElementById("refreshForm").submit(); }, 2000);
 </script>
 </body>
 </html>
