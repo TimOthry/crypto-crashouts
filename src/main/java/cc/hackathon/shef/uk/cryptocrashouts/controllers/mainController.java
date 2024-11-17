@@ -30,7 +30,7 @@ public class mainController {
         this.playerService = playerService;
     }
 
-    @GetMapping("/landing")
+    @GetMapping("/") // Changed from "/landing"
     public String index() {
         return "landing";
     }
